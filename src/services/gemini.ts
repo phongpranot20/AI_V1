@@ -111,8 +111,11 @@ export async function getChatResponse(message: string, history: any[] = [], imag
 
 function handleGeminiError(error: any) {
   const errorMsg = error?.message || "";
+  const apiKey = process.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY || "";
+  const maskedKey = apiKey ? `${apiKey.substring(0, 6)}...` : "ไม่พบคีย์";
+
   if (errorMsg.includes('429') || errorMsg.includes('RESOURCE_EXHAUSTED')) {
-    throw new Error("โควต้าการใช้งาน (Quota) เต็มแล้วครับ\n\n**วิธีแก้:**\n1. ตรวจสอบโควต้าใน Google AI Studio\n2. หากใช้ Vercel ตรวจสอบว่าตั้งชื่อตัวแปรว่า `VITE_GEMINI_API_KEY` และกด Redeploy แล้ว\n3. หากอยู่จีน/ใช้ VPN ให้ลองเปลี่ยน Server ครับ");
+    throw new Error(`โควต้าเต็ม (Quota Exceeded)\n\nคีย์ที่ใช้อยู่: ${maskedKey}\n\n**วิธีแก้:**\n1. หากคีย์ยังเป็นอันเก่า ให้ไปที่ Vercel -> Deployments -> กด **Redeploy**\n2. หากคีย์ใหม่แล้วยังติด แสดงว่าบัญชีนี้ใช้ครบโควต้าฟรีของวันแล้ว ให้ลองสร้างคีย์จาก Google Account อื่นครับ`);
   }
   throw error;
 }
