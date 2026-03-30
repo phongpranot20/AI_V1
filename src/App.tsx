@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Loader2, Info, ExternalLink, GraduationCap, Sparkles, MessageSquare, BookOpen, MapPin, Calendar, Menu, X, Image as ImageIcon, Trash2 } from 'lucide-react';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { motion, AnimatePresence } from 'motion/react';
 import { getChatResponse, getChatResponseStream, AVAILABLE_MODELS } from './services/gemini';
 import { cn } from './lib/utils';
@@ -371,7 +372,16 @@ export default function App() {
                             />
                           )}
                           <div className="markdown-body prose-sm sm:prose">
-                            <Markdown>{msg.text}</Markdown>
+                            <Markdown 
+                              remarkPlugins={[remarkGfm]}
+                              components={{
+                                a: ({ node, ...props }) => (
+                                  <a {...props} target="_blank" rel="noreferrer" />
+                                )
+                              }}
+                            >
+                              {msg.text}
+                            </Markdown>
                           </div>
                         </div>
 

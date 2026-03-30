@@ -35,6 +35,7 @@ body {
 .markdown-body {
   font-size: 0.95rem;
   line-height: 1.6;
+  word-break: break-word;
 }
 
 .markdown-body p {
@@ -43,6 +44,18 @@ body {
 
 .markdown-body strong {
   color: var(--color-ku-green);
+}
+
+.markdown-body a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.markdown-body a:hover {
+  color: #1d4ed8;
 }
 
 /* Custom Scrollbar */
