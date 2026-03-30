@@ -135,9 +135,7 @@ export default function App() {
       
       // ตรวจสอบ Error 429 อีกครั้งในระดับ UI
       if (errorMessage.includes('429') || errorMessage.includes('RESOURCE_EXHAUSTED')) {
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-        const maskedKey = apiKey ? `${apiKey.substring(0, 8)}...` : "ไม่พบคีย์";
-        errorMessage = `โควต้าเต็ม (Quota Exceeded)\n\n🔑 คีย์ที่ใช้อยู่: ${maskedKey}\n\n**วิธีแก้:**\n1. ตรวจสอบว่าใส่คีย์ใน Vercel ถูกต้องและกด Redeploy แล้ว\n2. หากคีย์ใหม่แล้วยังติด แสดงว่าโปรเจกต์ใน AI Studio เต็ม ให้ลองสร้างโปรเจกต์ใหม่ครับ`;
+        errorMessage = `โควต้าเต็ม (Quota Exceeded)\n\n**วิธีแก้:**\n1. ตรวจสอบว่าใส่คีย์ใน Vercel ถูกต้องและกด Redeploy แล้ว\n2. หากคีย์ใหม่แล้วยังติด แสดงว่าโปรเจกต์ใน AI Studio เต็ม ให้ลองสร้างโปรเจกต์ใหม่ครับ`;
       }
       
       setMessages((prev) => [
@@ -286,14 +284,10 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="p-6 border-t border-slate-50 space-y-2">
+                <div className="p-6 border-t border-slate-50">
                   <p className="text-[10px] text-slate-400 leading-relaxed">
                     พัฒนาขึ้นเพื่อเป็นตัวช่วยสำหรับนิสิตและบุคลากร มหาวิทยาลัยเกษตรศาสตร์
                   </p>
-                  <div className="text-[9px] text-slate-300 font-mono">
-                    <p>Build: 30 Mar 2026 - 22:10</p>
-                    <p>Key: {import.meta.env.VITE_GEMINI_API_KEY ? `${import.meta.env.VITE_GEMINI_API_KEY.substring(0, 8)}...` : "None"}</p>
-                  </div>
                 </div>
               </div>
             </aside>
