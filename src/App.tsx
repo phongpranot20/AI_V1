@@ -1,5 +1,6 @@
+// Last Update: 31 Mar 2026 - 00:04 (UTC)
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, Info, ExternalLink, GraduationCap, Sparkles, MessageSquare, BookOpen, MapPin, Calendar, Menu, X, Image as ImageIcon, Trash2, FileText, ChevronRight } from 'lucide-react';
+import { Send, Bot, User, Loader2, Info, ExternalLink, GraduationCap, Sparkles, MessageSquare, BookOpen, MapPin, Calendar, Menu, X, Image as ImageIcon, Trash2 } from 'lucide-react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion, AnimatePresence } from 'motion/react';
@@ -14,48 +15,10 @@ interface Message {
 }
 
 const QUICK_ACTIONS = [
-  { icon: FileText, label: 'แบบฟอร์มต่างๆ', query: 'ขอแบบฟอร์มและเอกสารทั้งหมด' },
-  { icon: Sparkles, label: 'การ "แอดมือ"', query: '"แอดมือ" คืออะไร และต้องใช้เอกสารอะไรบ้าง' },
   { icon: Calendar, label: 'ปฏิทินการศึกษา', query: 'ขอปฏิทินการศึกษาปีล่าสุดหน่อย' },
+  { icon: BookOpen, label: 'การลงทะเบียน', query: 'ขั้นตอนการลงทะเบียนเรียนทำยังไง' },
   { icon: MapPin, label: 'แผนที่วิทยาเขต', query: 'ขอแผนที่มหาวิทยาลัยเกษตรศาสตร์ บางเขน' },
-];
-
-const FORM_LIST = [
-  { 
-    label: 'คำร้องขอลงทะเบียน (Registrar-2)', 
-    query: 'ขอแบบฟอร์มคำร้องขอลงทะเบียนเรียน Registrar-2',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2024/11/Request-for-Registration.pdf'
-  },
-  { 
-    label: 'คำร้องทั่วไป (Registrar-1)', 
-    query: 'ขอแบบฟอร์มคำร้องทั่วไป Registrar-1',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2023/11/General-Request.pdf'
-  },
-  { 
-    label: 'ผ่อนผันค่าเทอม (Registrar-3)', 
-    query: 'ขอแบบฟอร์มผ่อนผันค่าธรรมเนียมการศึกษา Registrar-3',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2024/11/Postpone-tuition-and-fee-payments.pdf'
-  },
-  { 
-    label: 'ใบลาพักการศึกษา (Registrar-10)', 
-    query: 'ขอใบลาพักการศึกษา Registrar-10',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2023/11/Request-for-Leave-of-Absence-Request.pdf'
-  },
-  { 
-    label: 'ใบลาออก (Registrar-16)', 
-    query: 'ขอใบลาออก Registrar-16',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2023/11/Resignation-Form.pdf'
-  },
-  { 
-    label: 'แบบฟอร์ม KU1', 
-    query: 'ขอแบบฟอร์ม KU1',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2023/11/KU1-Registration-Form.pdf'
-  },
-  { 
-    label: 'แบบฟอร์ม KU3 (เพิ่ม-ถอน)', 
-    query: 'ขอแบบฟอร์ม KU3',
-    url: 'https://registrar.ku.ac.th/wp-content/uploads/2023/11/KU3-Add-Drop-Form.pdf'
-  },
+  { icon: MessageSquare, label: 'รถตะลัย', query: 'ตารางเดินรถตะลัยสายต่างๆ' },
 ];
 
 export default function App() {
@@ -281,35 +244,6 @@ export default function App() {
 
                 <div className="flex-1 overflow-y-auto p-6 space-y-8">
                   <div>
-                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">แบบฟอร์มและเอกสาร</h3>
-                    <div className="space-y-2">
-                      {FORM_LIST.map((form, idx) => (
-                        <div key={idx} className="flex items-center gap-1 group">
-                          <button
-                            onClick={() => {
-                              handleSend(form.query);
-                              setIsSidebarOpen(false);
-                            }}
-                            className="flex-1 flex items-center justify-between p-2 text-xs text-slate-600 hover:bg-ku-soft hover:text-ku-green rounded-lg transition-all"
-                          >
-                            <span className="truncate pr-2">{form.label}</span>
-                            <ChevronRight size={14} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </button>
-                          <a 
-                            href={form.url} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            className="p-2 text-slate-400 hover:text-ku-green hover:bg-ku-soft rounded-lg transition-all"
-                            title="ดาวน์โหลด PDF โดยตรง"
-                          >
-                            <ExternalLink size={14} />
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">คำถามที่พบบ่อย</h3>
                     <div className="space-y-4">
                       {QUICK_ACTIONS.map((action, idx) => (
@@ -489,51 +423,19 @@ export default function App() {
                 <div className="p-4 sm:p-6 bg-gradient-to-t from-[#f8fafc] via-[#f8fafc] to-transparent">
                   <div className="max-w-4xl mx-auto w-full">
                     {messages.length === 1 && !isLoading && (
-                      <div className="space-y-6 mb-8">
-                        <div>
-                          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-1">คำถามที่พบบ่อย</h3>
-                          <div className="flex overflow-x-auto pb-4 gap-3 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
-                            {QUICK_ACTIONS.map((action, idx) => (
-                              <button
-                                key={idx}
-                                onClick={() => handleSend(action.query)}
-                                className="flex-none w-[130px] sm:w-auto flex flex-col items-center gap-2 sm:gap-3 p-4 sm:p-6 bg-white border border-slate-100 rounded-2xl hover:border-ku-green hover:shadow-md transition-all group"
-                              >
-                                <div className="text-slate-300 group-hover:text-ku-green transition-colors">
-                                  <action.icon size={18} className="sm:w-5 sm:h-5" />
-                                </div>
-                                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 group-hover:text-ku-green uppercase tracking-tight text-center">{action.label}</span>
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div>
-                          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-1">แบบฟอร์มยอดนิยม</h3>
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            {FORM_LIST.slice(0, 4).map((form, idx) => (
-                              <button
-                                key={idx}
-                                onClick={() => handleSend(form.query)}
-                                className="flex items-center gap-3 p-3 bg-white border border-slate-100 rounded-xl hover:border-ku-green hover:shadow-sm transition-all group text-left"
-                              >
-                                <div className="w-8 h-8 rounded-lg bg-ku-soft flex items-center justify-center text-ku-green shrink-0">
-                                  <FileText size={16} />
-                                </div>
-                                <span className="text-[10px] sm:text-[11px] font-medium text-slate-600 group-hover:text-ku-green leading-tight line-clamp-2">{form.label}</span>
-                              </button>
-                            ))}
-                            <button
-                              onClick={() => handleSend('ขอแบบฟอร์มและเอกสารทั้งหมด')}
-                              className="flex items-center gap-3 p-3 bg-ku-soft/30 border border-ku-green/10 rounded-xl hover:bg-ku-soft transition-all group text-left"
-                            >
-                              <div className="w-8 h-8 rounded-lg bg-ku-green flex items-center justify-center text-white shrink-0">
-                                <ChevronRight size={16} />
-                              </div>
-                              <span className="text-[10px] sm:text-[11px] font-bold text-ku-green uppercase tracking-tight">ดูทั้งหมด</span>
-                            </button>
-                          </div>
-                        </div>
+                      <div className="flex overflow-x-auto pb-4 gap-3 mb-4 sm:mb-8 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                        {QUICK_ACTIONS.map((action, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => handleSend(action.query)}
+                            className="flex-none w-[130px] sm:w-auto flex flex-col items-center gap-2 sm:gap-3 p-4 sm:p-6 bg-white border border-slate-100 rounded-2xl hover:border-ku-green hover:shadow-md transition-all group"
+                          >
+                            <div className="text-slate-300 group-hover:text-ku-green transition-colors">
+                              <action.icon size={18} className="sm:w-5 sm:h-5" />
+                            </div>
+                            <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 group-hover:text-ku-green uppercase tracking-tight text-center">{action.label}</span>
+                          </button>
+                        ))}
                       </div>
                     )}
 

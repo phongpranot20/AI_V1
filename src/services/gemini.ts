@@ -1,3 +1,4 @@
+// Last Update: 31 Mar 2026 - 00:04 (UTC)
 import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `คุณคือ AI Chatbot ของมหาวิทยาลัยเกษตรศาสตร์ (Kasetsart University - KU) 
